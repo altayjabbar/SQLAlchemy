@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String ,or_ # type: ignore
+from sqlalchemy import create_engine, Column, Integer, String ,func# type: ignore
 from sqlalchemy.orm import declarative_base, sessionmaker  # type: ignore
 import random
 
@@ -87,5 +87,9 @@ session = Session()
 
 
 
-users = session.query(User).filter_by(age=30).delete()
-session.commit()
+# users = session.query(User).filter_by(ag=30).delete()
+# session.commit()
+
+
+users_count = session.query(User.age, func.count(User.id)).group_by(User.age).all()
+print(users_count)
