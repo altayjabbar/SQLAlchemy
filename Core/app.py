@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String  # type: ignore
+from sqlalchemy import create_engine, Column, Integer, String ,or_ # type: ignore
 from sqlalchemy.orm import declarative_base, sessionmaker  # type: ignore
 import random
 
@@ -63,16 +63,29 @@ session = Session()
 # y = session.query(User).filter(User.age== 343 ).delete()
 # session.commit()
 
-names= ['Alice','Darvin','James','Foden']
-ages = [23,54,76,4,23,51,66,23,13,39]
+# names= ['Alice','Darvin','James','Foden']
+# ages = [23,54,76,4,23,51,66,23,13,39]
 
-# for x in range(20):
-#     user = User(name=random.choice(names),age=random.choice(ages))
-#     session.add(user)
-# session.commit()
+# # for x in range(20):
+# #     user = User(name=random.choice(names),age=random.choice(ages))
+# #     session.add(user)
+# # session.commit()
 
 
-users = session.query(User).order_by(User.name).all()
+# users = session.query(User).order_by(User.name).all()
 
-for user in users:
-    print(f'User age:{user.age},name:{user.name},id:{user.id}')
+# for user in users:
+#     print(f'User age:{user.age},name:{user.name},id:{user.id}')
+
+
+# user_all = session.query(User).all()
+
+# user_filtired= session.query(User).filter(User.age>25).all()
+
+# print("all users:",len(user_all))
+# print("Filtered users:",len(user_filtired))
+
+
+
+users = session.query(User).filter_by(age=30).delete()
+session.commit()
