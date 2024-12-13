@@ -1,15 +1,19 @@
-from models import University,Student,session
+from models import Course,Student,session
 
-university1 = University(name="Bakı Dövlət Universiteti")
-university2 = University(name="UNEC")
+course1 = Course(name="Python Programming")
+course2 = Course(name="Database Management")
+student1 = Student(name="Ali")
+student2 = Student(name="Vəli")
 
-student1 = Student(name="Elnur", university=university1)
-student2 = Student(name="Aygün", university=university2)
+student1.courses = [course1, course2]
+student2.courses = [course1]
 
+course1.students = [student1, student2]
+course2.students = [student1]
 
-session.add(university1)
-session.add(university2)
-
-session.add_all([student1, student2])
+session.add(student1)
+session.add(student2)
+session.add(course1)
+session.add(course2)
 session.commit()
 
