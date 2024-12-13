@@ -1,17 +1,15 @@
-from models import Address,User,session
+from models import University,Student,session
 
-user1 = User(name = 'John',age = 54)
-user2 = User(name = 'Frex', age = 23) 
+university1 = University(name="Bakı Dövlət Universiteti")
+university2 = University(name="UNEC")
+
+student1 = Student(name="Elnur", university=university1)
+student2 = Student(name="Aygün", university=university2)
 
 
-address1 = Address(city='Baki', state = 'Feyzulla Qassimzade',zip_code = '100023')
-address2 = Address(city='Gence', state='Nizami Rayonu', zip_code='200100')
-address3 = Address(city='Sumqayit', state='Absheron', zip_code='300200')
+session.add(university1)
+session.add(university2)
 
-user1.addresses.extend([address1,address2])
-user2.addresses.append(address3)
-
-session.add(user1)
-session.add(user2)
-
+session.add_all([student1, student2])
 session.commit()
+
